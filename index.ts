@@ -1,30 +1,35 @@
-import readline, { Interface } from 'node:readline/promises'
+import inquirer from 'inquirer'
 
-interface RLInterface extends Interface {
-    input: typeof process.stdin
+const flags = []
+process.argv.forEach(arg => {
+    if (/^-/.test(arg)) {
+        flags.push(arg.replaceAll('-', ''))
+    }
+})
+
+console.log(flags)
+
+if (flags.includes('a') || flags.includes('add')) {
+    // addQuestion()
+    console.log('add question')
+} else {
+    askQuestion()
 }
 
-const rl: RLInterface = readline.createInterface({
-    terminal: true,
-    input: process.stdin,
-    output: process.stdin,
-}) as RLInterface
+// console.log(process.argv)
 
-const answer = await rl.question('What is your name?')
+async function askQuestion() {
+    const answers = await inquirer.prompt([
+        { type: 'input', name: 'name', message: 'What is your name?' },
+        { type: 'input', name: 'live', message: 'Where do you live?' },
+        {
+            type: 'list',
+            name: 'live2',
+            message: 'Where do you live?',
+            choices: ['NI', 'Wales', 'Scotland', 'England', 'Elsewhere', 'Mauritius'],
+        },
+    ])
 
-console.log(`Your name is ${answer}`)
-rl.close()
-
-// console.log("What is your name?");
-
-// let input = "";
-
-// rl.input.on("keypress", (event, rl) => {
-//     console.log(event, rl)
-//   if (rl.name === "return") {
-//     console.log(`Your name is ${input}.`);
-//     console.log("Where do you live?");
-//   } else {
-//     input += event;
-//   }
-// });
+    console.log(`Your name is ${answers.name}.`)
+    console.log(`You live in ${answers.live} which is in ${answers.live2}`)
+}

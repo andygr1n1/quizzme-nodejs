@@ -9,3 +9,5 @@ module.exports = {name: 'quizzme'}
 import http from 'http'
 export const name = 'quizzme'
 -----------------------------
+https://www.npmjs.com/package/inquirer
+-----------------------------
