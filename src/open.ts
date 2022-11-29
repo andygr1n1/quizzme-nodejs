@@ -13,10 +13,13 @@ import fs from 'fs/promises'
 // })
 
 // promises
-try {
-    const contents = await fs.readFile('./quizz.json')
-    console.log(JSON.parse(contents.toString()))
-} catch (error) {
-    console.log(error)
-    process.exit(1)
+export const readFromJSON = async () => {
+    try {
+        const contents = await fs.readFile('./src/quizz.json')
+        console.log(JSON.parse(contents.toString()))
+    } catch (error) {
+        console.log(error)
+        process.exit(1)
+    }
+    console.log('just for nodemon')
 }

@@ -1,6 +1,7 @@
 import inquirer from 'inquirer'
+import { readFromJSON } from './open.js'
 
-const flags = []
+const flags: string[] = []
 process.argv.forEach(arg => {
     if (/^-/.test(arg)) {
         flags.push(arg.replaceAll('-', ''))
@@ -32,4 +33,6 @@ async function askQuestion() {
 
     console.log(`Your name is ${answers.name}.`)
     console.log(`You live in ${answers.live} which is in ${answers.live2}`)
+
+    readFromJSON()
 }
