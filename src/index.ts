@@ -1,38 +1,12 @@
-import inquirer from 'inquirer'
-import { readFromJSON } from './open.js'
-
-const flags: string[] = []
-process.argv.forEach(arg => {
-    if (/^-/.test(arg)) {
-        flags.push(arg.replaceAll('-', ''))
-    }
-})
-
-console.log(flags)
-
-if (flags.includes('a') || flags.includes('add')) {
-    // addQuestion()
-    console.log('add question')
-} else {
-    askQuestion()
-}
+import { addQuestion } from './functions/add_question.js'
+import { askQuestion } from './functions/ask_question.js'
+import { getFlags } from './helpers/getFlags.js'
 
 // console.log(process.argv)
+const flags = getFlags()
 
-async function askQuestion() {
-    const answers = await inquirer.prompt([
-        { type: 'input', name: 'name', message: 'What is your name?' },
-        { type: 'input', name: 'live', message: 'Where do you live?' },
-        {
-            type: 'list',
-            name: 'live2',
-            message: 'Where do you live?',
-            choices: ['NI', 'Wales', 'Scotland', 'England', 'Elsewhere', 'Mauritius'],
-        },
-    ])
-
-    console.log(`Your name is ${answers.name}.`)
-    console.log(`You live in ${answers.live} which is in ${answers.live2}`)
-
-    readFromJSON()
+if (flags.includes('a') || flags.includes('add')) {
+    addQuestion()
+} else {
+    askQuestion()
 }

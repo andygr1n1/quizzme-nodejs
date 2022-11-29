@@ -19,5 +19,6 @@ export const readFromJSON = async () => {
         console.log(error);
         process.exit(1);
     }
+    console.log('just for nodemon');
 };
 //# sourceMappingURL=open.js.map

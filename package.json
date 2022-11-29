@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "nodejs": "node index.js",
-        "nodets": "ts-node-esm index.ts",
+        "ts": "ts-node-esm ./src/index.ts",
         "nodemon": "nodemon index.ts"
     },
     "keywords": [],

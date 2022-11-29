@@ -15,7 +15,7 @@ import fs from 'fs/promises'
 // promises
 export const readFromJSON = async () => {
     try {
-        const contents = await fs.readFile('./src/quizz.json')
+        const contents = await fs.readFile('./src/db/quizz.json')
         console.log(JSON.parse(contents.toString()))
     } catch (error) {
         console.log(error)
