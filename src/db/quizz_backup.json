@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "question": "Как звали отца Нефия?",
+        "answer": "Легий",
+        "lastAsked": "Tue Nov 29 2022 23:27:55 GMT+0200 (Eastern European Standard Time)",
+        "lastAnsweredCorrect": true
+    },
+    {
+        "id": 2,
+        "question": "Кому Нефий отрезал голову по повелению Господа?",
+        "answer": "Лаван",
+        "lastAsked": "Tue Nov 29 2022 23:27:55 GMT+0200 (Eastern European Standard Time)",
+        "lastAnsweredCorrect": true
+    },
+    {
+        "id": 3,
+        "question": "Имя предка, чьим потомком являлся Легий (информация содержалась на медных листах)?",
+        "answer": "Иосиф",
+        "lastAsked": "Tue Nov 29 2022 23:27:55 GMT+0200 (Eastern European Standard Time)",
+        "lastAnsweredCorrect": true
+    }
+]

@@ -1,17 +1,24 @@
+import fs from 'node:fs/promises'
 import inquirer from 'inquirer'
+import type { IQuestion } from '../types.js'
+import { checkAnswer } from '../helpers/check_answer.js'
+import { getQuizJsonPath } from '../db/get_quizz_json_path.js'
 
 export const askQuestion = async () => {
-    const answers = await inquirer.prompt([
-        { type: 'input', name: 'name', message: 'What is your name?' },
-        { type: 'input', name: 'live', message: 'Where do you live?' },
-        {
-            type: 'list',
-            name: 'live2',
-            message: 'Where do you live?',
-            choices: ['NI', 'Wales', 'Scotland', 'England', 'Elsewhere', 'Mauritius'],
-        },
-    ])
+    const questionsData: Buffer = await fs.readFile(getQuizJsonPath())
+    const parsedData: IQuestion[] = JSON.parse(questionsData.toString())
 
-    console.log(`Your name is ${answers.name}.`)
-    console.log(`You live in ${answers.live} which is in ${answers.live2}`)
+    const target = parsedData[Math.floor(Math.random()) * parsedData.length]
+
+    const { question, answer } = target
+
+    const answers = await inquirer.prompt([{ type: 'input', name: 'useranswer', message: question }])
+
+    target.lastAnsweredCorrect = await checkAnswer(answers.useranswer, answer)
+    target.lastAsked = Date().toString()
+
+    const newData = parsedData.filter(item => item.id !== target.id)
+    newData.push(target)
+
+    await fs.writeFile(getQuizJsonPath(), JSON.stringify(newData))
 }
